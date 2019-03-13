@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace FirstGitClone_2
 {
     //POCO - Plain Old CLR Object
+
     class Department
     {
         public int DepartmentId { get; set; }
@@ -13,8 +14,15 @@ namespace FirstGitClone_2
         public string Description { get; set; }
     }
 
+    
+
     class EFCoreQorganizationDb : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=AlbertG-PC;Database=ASP-Core-w-Entity;Trusted_Connection=True;");
+        }
+
         public DbSet<Department> Departments { get; set; }
     }
 
@@ -22,14 +30,7 @@ namespace FirstGitClone_2
     {
         static void Main(string[] args)
         {
-            EFCoreQorganizationDb efCntx = new EFCoreQorganizationDb();
-            //Select all departments
-            List<Department> Depts = efCntx.Departments.ToList();
 
-            Department D = new Department() { Description = "Development", Name = "Dev" };
-            efCntx.Departments.Add(D);
-
-            efCntx.SaveChanges();
         }
     }
 }
