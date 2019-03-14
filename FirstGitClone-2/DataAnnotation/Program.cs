@@ -71,13 +71,58 @@ namespace DataAnnotation
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //        modelBuilder.Entity<Book>()
+
+        //}
+
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            #region Insert
+            //EFCoreQorganizationDb shopDbContext = new EFCoreQorganizationDb();
+            //Author author = new Author() { FirstName = "Manzoor", LastName = "Ahmed" };
+
+            ////shopDbContext.Authors.Add(author); ----Old version approach
+            ////shopDbContext.SaveChanges();
+
+            //shopDbContext.Add<Author>(author);
+            //shopDbContext.SaveChanges();
+            #endregion
+
+            #region Delete
+            //// Author author = new Author(); //Garbage Collection - CLR
+
+
+            ////ShopDbContext shopDbContext = new ShopDbContext();
+            ////shopDbContext.Dispose();
+
+            //using (ShopDbContext shopDbContext = new ShopDbContext())
+            //{
+            //    Author author = shopDbContext.Authors.Find(4);
+
+            //    //shopDbContext.Authors.Remove(author);
+            //    //shopDbContext.SaveChanges();
+
+            //    shopDbContext.Remove<Author>(author);
+            //    shopDbContext.SaveChanges();
+            //} 
+            #endregion
+
+            #region Update
+            ////Connected approach
+            //using (ShopDbContext shopDbContext = new ShopDbContext())
+            //{
+            //    Author author = shopDbContext.Authors.Find(3);
+            //    author.FirstName = "Jack";
+            //    shopDbContext.Update<Author>(author);
+            //    shopDbContext.SaveChanges();
+            //} 
+            #endregion
         }
     }
 }
