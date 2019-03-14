@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstGitClone-2", "FirstGitClone-2\FirstGitClone-2.csproj", "{278436EE-68F1-4940-9394-31F3094F888A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreClassdesign", "EFCoreClassdesign\EFCoreClassdesign.csproj", "{49C9BB1B-657E-4E47-80DD-6F1AEC4F9CAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreClassdesign", "EFCoreClassdesign\EFCoreClassdesign.csproj", "{49C9BB1B-657E-4E47-80DD-6F1AEC4F9CAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAnnotation", "DataAnnotation\DataAnnotation.csproj", "{6E0C0EF4-C333-4B66-BFBD-25F5C7103977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{49C9BB1B-657E-4E47-80DD-6F1AEC4F9CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49C9BB1B-657E-4E47-80DD-6F1AEC4F9CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49C9BB1B-657E-4E47-80DD-6F1AEC4F9CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0C0EF4-C333-4B66-BFBD-25F5C7103977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0C0EF4-C333-4B66-BFBD-25F5C7103977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0C0EF4-C333-4B66-BFBD-25F5C7103977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0C0EF4-C333-4B66-BFBD-25F5C7103977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
