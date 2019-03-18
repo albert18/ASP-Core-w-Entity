@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace DataAnnotation
 {
@@ -95,34 +96,112 @@ namespace DataAnnotation
             #endregion
 
             #region Delete
-            //// Author author = new Author(); //Garbage Collection - CLR
+            // Author author = new Author(); //Garbage Collection - CLR
 
+            //EFCoreQorganizationDb shopDbContext = new EFCoreQorganizationDb();
+            //shopDbContext.Dispose();
 
-            ////ShopDbContext shopDbContext = new ShopDbContext();
-            ////shopDbContext.Dispose();
-
-            //using (ShopDbContext shopDbContext = new ShopDbContext())
+            //using (EFCoreQorganizationDb shopDbContext = new EFCoreQorganizationDb())
             //{
-            //    Author author = shopDbContext.Authors.Find(4);
+            //    Author author = shopDbContext.Authors.Find(3);
 
             //    //shopDbContext.Authors.Remove(author);
             //    //shopDbContext.SaveChanges();
 
             //    shopDbContext.Remove<Author>(author);
             //    shopDbContext.SaveChanges();
-            //} 
+            //}
             #endregion
 
             #region Update
             ////Connected approach
-            //using (ShopDbContext shopDbContext = new ShopDbContext())
+            //using (EFCoreQorganizationDb shopDbContext = new EFCoreQorganizationDb())
             //{
-            //    Author author = shopDbContext.Authors.Find(3);
+            //    Author author = shopDbContext.Authors.Find(2);
             //    author.FirstName = "Jack";
             //    shopDbContext.Update<Author>(author);
             //    shopDbContext.SaveChanges();
+            //}
+            #endregion
+
+            #region Sample
+            //Console.Write("Enter Book Id : ");
+            //int BookId = int.Parse(Console.ReadLine());
+
+            //using (var myD = new EFCoreQorganizationDb())
+            //{
+            //    Book book = myD.Books.Find(BookId);
+
+            //    Console.WriteLine("BookId: {0} Name: {1} Price: {2}", book.BookId, book.BookName, book.PricePerUnit);
+
+            //    Console.ReadLine();
+
             //} 
             #endregion
+
+            #region Select Operation
+            //using (var myD = new EFCoreQorganizationDb())
+            //{
+            //    //Book book;
+
+            //    //FirstOrDefault grab the first but can be multiple
+            //    //book = myD.Books.Where(x => x.PricePerUnit == 12.96).FirstOrDefault();
+
+            //    //SingleOrDefault grab the first one
+
+            //    //if (book != null)
+            //    //{
+            //    //    Console.WriteLine("BookId:{0} Name:{1} Price:{2}"
+            //    //        , book.BookId, book.BookName, book.PricePerUnit);
+            //    //}
+            //    //else
+            //    //{
+            //    //    Console.WriteLine("Book Not Found");
+            //    //}
+
+
+            //    //select count(*) from Book
+            //    //int NumberOfBooks = myD.Books.Count();
+            //    //Console.WriteLine("Number Of Books are " + NumberOfBooks);
+
+
+            //    //PricePerUnit>5000
+            //    //List<Book> list = shopDbContext.Books.Where(x => x.PricePerUnit > 5000).ToList();
+
+
+            //    //List<Book> list = myD.Books.Where(x => x.AuthorId == 1).ToList();
+
+            //    //Get All the books whose author's first name is "Manzoor"
+            //    //int AuthorId = myD.Authors.Where(x => x.FirstName == "Manzoor").FirstOrDefault().AuthorId;
+            //    //List<Book> list = myD.Books.Where(x => x.AuthorId == 1).ToList();
+
+            //    ////List<Book> list = myD.Books.Where(x => x.Author.FirstName == "Manzoor").ToList();
+
+            //    //foreach (var book in list)
+            //    //{
+            //    //    Console.WriteLine("BookId:{0} Name:{1} Price:{2}", book.BookId, book.BookName, book.PricePerUnit);
+            //    //}
+
+            //} 
+            #endregion
+
+            using (var shopDbContext= new EFCoreQorganizationDb())
+            {
+                //Eager Loading Related entities
+                IEnumerable<Author> authors = shopDbContext.Authors.Include(x=>x.Books).ToList();
+
+                foreach (var item in authors)
+                {
+                    Console.WriteLine("Books of Author {0} are :", item.FullName);
+                    foreach (var book in item.Books)
+                    {
+                        Console.WriteLine("BookId : {0} BookName {1}", book.BookId,book.BookName);
+                    }
+                }
+
+                Console.ReadLine();
+            }
+
         }
     }
 }
