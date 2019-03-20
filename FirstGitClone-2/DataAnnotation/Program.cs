@@ -44,11 +44,11 @@ namespace DataAnnotation
         [Required]
         public double PricePerUnit { get; set; }
 
-        [Column(Order = 3)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedOn { get; set; }
+        //[Column(Order = 3)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //public DateTime CreatedOn { get; set; }
 
-        [Column(Order = 4)]
+        [Column(Order = 3)]
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
 
@@ -185,19 +185,39 @@ namespace DataAnnotation
             //} 
             #endregion
 
-            using (var shopDbContext= new EFCoreQorganizationDb())
-            {
-                //Eager Loading Related entities
-                IEnumerable<Author> authors = shopDbContext.Authors.Include(x=>x.Books).ToList();
+            #region Section 6
+            //using (var shopDbContext= new EFCoreQorganizationDb())
+            //{
+            //    //Eager Loading Related entities
+            //    IEnumerable<Author> authors = shopDbContext.Authors.Include(x=>x.Books).ToList();
 
-                foreach (var item in authors)
+            //    foreach (var item in authors)
+            //    {
+            //        Console.WriteLine("Books of Author {0} are :", item.FullName);
+            //        foreach (var book in item.Books)
+            //        {
+            //            Console.WriteLine("BookId : {0} BookName {1}", book.BookId,book.BookName);
+            //        }
+            //    }
+
+            //    Console.ReadLine();
+            //} 
+            #endregion
+
+            using (var shopDbContext = new EFCoreQorganizationDb())
+            {
+
+                List<Book> list = shopDbContext.Books.ToList();
+
+                foreach (var item in list)
                 {
-                    Console.WriteLine("Books of Author {0} are :", item.FullName);
-                    foreach (var book in item.Books)
-                    {
-                        Console.WriteLine("BookId : {0} BookName {1}", book.BookId,book.BookName);
-                    }
+                    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
                 }
+
+
+                shopDbContext.Books.Add(new Book() { BookName = "ASP", PricePerUnit = 15.00, AuthorId = 1 });
+                shopDbContext.SaveChanges();
+
 
                 Console.ReadLine();
             }
