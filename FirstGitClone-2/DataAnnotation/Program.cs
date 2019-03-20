@@ -207,16 +207,39 @@ namespace DataAnnotation
             using (var shopDbContext = new EFCoreQorganizationDb())
             {
 
-                List<Book> list = shopDbContext.Books.ToList();
+                //List<Book> list = shopDbContext.Books.ToList();
 
-                foreach (var item in list)
+                //foreach (var item in list)
+                //{
+                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+                //}
+
+                //Add Record
+                //shopDbContext.Books.Add(new Book() { BookName = "ASP", PricePerUnit = 15.00, AuthorId = 1 });
+                //shopDbContext.SaveChanges();
+                //-----------------------------------------------------------------
+                //Immediate Mode - List, IEnumerable
+                //IEnumerable<Book> list = shopDbContext.Books.ToList();
+
+                //Deffered Mode - IEnumerable, IQueryable
+                //IEnumerable<Book> list = shopDbContext.Books;
+                IQueryable<Book> list = shopDbContext.Books;
+
+                //foreach (var item in list)
+                //{
+                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+                //}
+
+                //foreach (var item in list)
+                //{
+                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+                //}
+
+                foreach (var item in list.Where(x => x.AuthorId == 1))
                 {
                     Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
                 }
 
-
-                shopDbContext.Books.Add(new Book() { BookName = "ASP", PricePerUnit = 15.00, AuthorId = 1 });
-                shopDbContext.SaveChanges();
 
 
                 Console.ReadLine();
