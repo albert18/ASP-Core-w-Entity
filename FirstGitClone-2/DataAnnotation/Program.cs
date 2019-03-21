@@ -204,47 +204,74 @@ namespace DataAnnotation
             //} 
             #endregion
 
+            #region Section 7
+            //using (var shopDbContext = new EFCoreQorganizationDb())
+
+            //{
+
+            //    //List<Book> list = shopDbContext.Books.ToList();
+
+            //    //foreach (var item in list)
+            //    //{
+            //    //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+            //    //}
+
+            //    //Add Record
+            //    //shopDbContext.Books.Add(new Book() { BookName = "ASP", PricePerUnit = 15.00, AuthorId = 1 });
+            //    //shopDbContext.SaveChanges();
+            //    //-----------------------------------------------------------------
+            //    //Immediate Mode - List, IEnumerable
+            //    //IEnumerable<Book> list = shopDbContext.Books.ToList();
+
+            //    //Deffered Mode - IEnumerable, IQueryable
+            //    //IEnumerable<Book> list = shopDbContext.Books;
+            //    IQueryable<Book> list = shopDbContext.Books;
+
+            //    //foreach (var item in list)
+            //    //{
+            //    //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+            //    //}
+
+            //    //foreach (var item in list)
+            //    //{
+            //    //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+            //    //}
+
+            //    foreach (var item in list.Where(x => x.AuthorId == 1))
+            //    {
+            //        Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
+            //    }
+
+
+
+            //    Console.ReadLine();
+            //} 
+            #endregion
+
+            #region Section 8
             using (var shopDbContext = new EFCoreQorganizationDb())
             {
 
-                //List<Book> list = shopDbContext.Books.ToList();
+                //Normal - note must all column
+                //IEnumerable<Book> books = shopDbContext.Books.FromSql("Select * from [dbo].[Book]").ToList();
 
-                //foreach (var item in list)
-                //{
-                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
-                //}
+                //Book Authors
+                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId=1").ToList();
 
-                //Add Record
-                //shopDbContext.Books.Add(new Book() { BookName = "ASP", PricePerUnit = 15.00, AuthorId = 1 });
-                //shopDbContext.SaveChanges();
-                //-----------------------------------------------------------------
-                //Immediate Mode - List, IEnumerable
-                //IEnumerable<Book> list = shopDbContext.Books.ToList();
+                //Passing Parameter = not best approach
+                //int AuthorId = 1;
+                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
 
-                //Deffered Mode - IEnumerable, IQueryable
-                //IEnumerable<Book> list = shopDbContext.Books;
-                IQueryable<Book> list = shopDbContext.Books;
 
-                //foreach (var item in list)
-                //{
-                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
-                //}
+                int AuthorId = 1;
+                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
 
-                //foreach (var item in list)
-                //{
-                //    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
-                //}
-
-                foreach (var item in list.Where(x => x.AuthorId == 1))
-                {
-                    Console.WriteLine("BookId : {0} BookName : {1} Price : {2}", item.BookId, item.BookName, item.PricePerUnit);
-                }
 
 
 
                 Console.ReadLine();
             }
-
+            #endregion
         }
     }
 }
