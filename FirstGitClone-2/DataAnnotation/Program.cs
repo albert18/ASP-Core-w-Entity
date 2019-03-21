@@ -54,6 +54,8 @@ namespace DataAnnotation
         public int AuthorId { get; set; }
 
         public Author Author { get; set; }
+
+        public string Test { get; set; }
     }
 
     [NotMapped]
