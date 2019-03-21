@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DataAnnotation
@@ -263,9 +264,31 @@ namespace DataAnnotation
                 //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
 
 
-                int AuthorId = 1;
-                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
+                //int AuthorId = 1;
+                SqlParameter authorId = new SqlParameter("@AuthodId", 1);
+                IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId = @AuthodId", authorId).ToList();
 
+                //int BookId = 45;
+                //int NoOfRecords = shopDbContext.Database.ExecuteSqlCommand("Delete from Book where BookId={0}", BookId);
+
+
+                ////Execute StoredProcedure "GetAllAuthors"
+                //IEnumerable<Author> Authors = shopDbContext.Authors
+                //                                    .FromSql("exec GetAllAuthors")
+                //                                    .ToList();
+
+                ////Execute StoredProcedure "GetAllBooksByAuthorId 1"
+                //IEnumerable<Book> BooksByAuthorId = shopDbContext.Books
+                //                                        .FromSql("exec GetAllBooksByAuthorId 1")
+                //                                        .ToList(); 
+
+                //Execute sp generated from migration file
+                //IEnumerable<Book> books = shopDbContext.Books
+                //                        .FromSql("exec GetAllBooks")
+                //                        .ToList();
+
+                //IEnumerable<BooksInfo> booksInfo = shopDbContext.BooksInfos
+                //    .FromSql("exec GetBooksInfo").ToList();
 
 
 
