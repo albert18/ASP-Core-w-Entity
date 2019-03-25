@@ -301,47 +301,40 @@ namespace DataAnnotation
             #region Section 9 Controlling Transactions Manually 
             using (var shopDbContext = new EFCoreQorganizationDb())
             {
-                //Author author1 = new Author() { FirstName = "Katty", LastName = "JOE" };
-                //shopDbContext.Add<Author>(author1);
-                //shopDbContext.SaveChanges();
+                ////Author author1 = new Author() { FirstName = "Katty", LastName = "JOE" };
+                ////shopDbContext.Add<Author>(author1);
+                ////shopDbContext.SaveChanges();
 
-                //Author author2 = new Author() { FirstName = "Lilly", LastName = "John" };
-                //shopDbContext.Add<Author>(author2);
-                //shopDbContext.SaveChanges();
-
-
-                //Always use in try/catch
-                using (var MyTransaction = shopDbContext.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        Author author1 = new Author() { FirstName = "Jade", LastName = "Jaded" };
-                        shopDbContext.Add<Author>(author1);
-                        shopDbContext.SaveChanges();
+                ////Author author2 = new Author() { FirstName = "Lilly", LastName = "John" };
+                ////shopDbContext.Add<Author>(author2);
+                ////shopDbContext.SaveChanges();
 
 
-                        Book book1 = new Book() { BookName = "ASP.Net", PricePerUnit = 7000, AuthorId = author1.AuthorId };
-                        shopDbContext.Add<Book>(book1);
-                        shopDbContext.SaveChanges();
-
-                        MyTransaction.Commit();
-                    }
-                    catch (Exception E)
-                    {
-                        MyTransaction.Rollback();
-                        Console.WriteLine(E.Message);
-                    }
-                }
+                ////Always use in try/catch
+                //using (var MyTransaction = shopDbContext.Database.BeginTransaction())
+                //{
+                //    try
+                //    {
+                //        Author author1 = new Author() { FirstName = "Jade", LastName = "Jaded" };
+                //        shopDbContext.Add<Author>(author1);
+                //        shopDbContext.SaveChanges();
 
 
+                //        Book book1 = new Book() { BookName = "ASP.Net", PricePerUnit = 7000, AuthorId = author1.AuthorId };
+                //        shopDbContext.Add<Book>(book1);
+                //        shopDbContext.SaveChanges();
+
+                //        MyTransaction.Commit();
+                //    }
+                //    catch (Exception E)
+                //    {
+                //        MyTransaction.Rollback();
+                //        Console.WriteLine(E.Message);
+                //    }
+                //}
 
 
-
-
-
-
-
-                Console.ReadLine();
+                //Console.ReadLine();
             }
             #endregion
 
