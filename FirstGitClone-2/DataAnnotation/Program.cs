@@ -55,7 +55,7 @@ namespace DataAnnotation
 
         public Author Author { get; set; }
 
-        public string Test { get; set; }
+        //public string Test { get; set; }
     }
 
     [NotMapped]
@@ -252,51 +252,99 @@ namespace DataAnnotation
             #endregion
 
             #region Section 8
+            //using (var shopDbContext = new EFCoreQorganizationDb())
+            //{
+
+            //    //Normal - note must all column
+            //    //IEnumerable<Book> books = shopDbContext.Books.FromSql("Select * from [dbo].[Book]").ToList();
+
+            //    //Book Authors
+            //    //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId=1").ToList();
+
+            //    //Passing Parameter = not best approach
+            //    //int AuthorId = 1;
+            //    //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
+
+
+            //    //int AuthorId = 1;
+            //    //SqlParameter authorId = new SqlParameter("@AuthodId", 1);
+            //    //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId = @AuthodId", authorId).ToList();
+
+            //    //int BookId = 45;
+            //    //int NoOfRecords = shopDbContext.Database.ExecuteSqlCommand("Delete from Book where BookId={0}", BookId);
+
+
+            //    ////Execute StoredProcedure "GetAllAuthors"
+            //    //IEnumerable<Author> Authors = shopDbContext.Authors
+            //    //                                    .FromSql("exec GetAllAuthors")
+            //    //                                    .ToList();
+
+            //    ////Execute StoredProcedure "GetAllBooksByAuthorId 1"
+            //    //IEnumerable<Book> BooksByAuthorId = shopDbContext.Books
+            //    //                                        .FromSql("exec GetAllBooksByAuthorId 1")
+            //    //                                        .ToList(); 
+
+            //    //Execute sp generated from migration file
+            //    //IEnumerable<Book> books = shopDbContext.Books
+            //    //                        .FromSql("exec GetAllBooks")
+            //    //                        .ToList();
+
+            //    //IEnumerable<BooksInfo> booksInfo = shopDbContext.BooksInfos
+            //    //    .FromSql("exec GetBooksInfo").ToList();
+
+
+
+            //    Console.ReadLine();
+            //}
+            #endregion
+
+            #region Section 9 Controlling Transactions Manually 
             using (var shopDbContext = new EFCoreQorganizationDb())
             {
+                //Author author1 = new Author() { FirstName = "Katty", LastName = "JOE" };
+                //shopDbContext.Add<Author>(author1);
+                //shopDbContext.SaveChanges();
 
-                //Normal - note must all column
-                //IEnumerable<Book> books = shopDbContext.Books.FromSql("Select * from [dbo].[Book]").ToList();
-
-                //Book Authors
-                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId=1").ToList();
-
-                //Passing Parameter = not best approach
-                //int AuthorId = 1;
-                //IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId ={0}", AuthorId).ToList();
+                //Author author2 = new Author() { FirstName = "Lilly", LastName = "John" };
+                //shopDbContext.Add<Author>(author2);
+                //shopDbContext.SaveChanges();
 
 
-                //int AuthorId = 1;
-                SqlParameter authorId = new SqlParameter("@AuthodId", 1);
-                IEnumerable<Book> booksByAuthor = shopDbContext.Books.FromSql("Select * from [dbo].[Book] where AuthorId = @AuthodId", authorId).ToList();
+                //Always use in try/catch
+                using (var MyTransaction = shopDbContext.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Author author1 = new Author() { FirstName = "Jade", LastName = "Jaded" };
+                        shopDbContext.Add<Author>(author1);
+                        shopDbContext.SaveChanges();
 
-                //int BookId = 45;
-                //int NoOfRecords = shopDbContext.Database.ExecuteSqlCommand("Delete from Book where BookId={0}", BookId);
+
+                        Book book1 = new Book() { BookName = "ASP.Net", PricePerUnit = 7000, AuthorId = author1.AuthorId };
+                        shopDbContext.Add<Book>(book1);
+                        shopDbContext.SaveChanges();
+
+                        MyTransaction.Commit();
+                    }
+                    catch (Exception E)
+                    {
+                        MyTransaction.Rollback();
+                        Console.WriteLine(E.Message);
+                    }
+                }
 
 
-                ////Execute StoredProcedure "GetAllAuthors"
-                //IEnumerable<Author> Authors = shopDbContext.Authors
-                //                                    .FromSql("exec GetAllAuthors")
-                //                                    .ToList();
 
-                ////Execute StoredProcedure "GetAllBooksByAuthorId 1"
-                //IEnumerable<Book> BooksByAuthorId = shopDbContext.Books
-                //                                        .FromSql("exec GetAllBooksByAuthorId 1")
-                //                                        .ToList(); 
 
-                //Execute sp generated from migration file
-                //IEnumerable<Book> books = shopDbContext.Books
-                //                        .FromSql("exec GetAllBooks")
-                //                        .ToList();
 
-                //IEnumerable<BooksInfo> booksInfo = shopDbContext.BooksInfos
-                //    .FromSql("exec GetBooksInfo").ToList();
+
 
 
 
                 Console.ReadLine();
             }
             #endregion
+
         }
     }
 }
