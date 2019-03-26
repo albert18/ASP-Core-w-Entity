@@ -18,6 +18,12 @@ namespace OSCBOL
         [ForeignKey("Product")]
         public int ProductId { get; set; }
 
+        [Required]
+        public int Quantity { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime DateOrder { get; set; }
+
         public Customer Customer { get; set; }
 
         public Product Product { get; set; }

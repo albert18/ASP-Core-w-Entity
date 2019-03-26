@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAnnotation", "DataAnnot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSCBOL", "OSCBOL\OSCBOL.csproj", "{D5473EED-C35A-487A-9BDB-E4911D03419B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSCDAL", "OSCDAL\OSCDAL.csproj", "{421AFEF6-D75D-4012-AE17-1CE947A0E218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D5473EED-C35A-487A-9BDB-E4911D03419B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5473EED-C35A-487A-9BDB-E4911D03419B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5473EED-C35A-487A-9BDB-E4911D03419B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421AFEF6-D75D-4012-AE17-1CE947A0E218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421AFEF6-D75D-4012-AE17-1CE947A0E218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421AFEF6-D75D-4012-AE17-1CE947A0E218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421AFEF6-D75D-4012-AE17-1CE947A0E218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
