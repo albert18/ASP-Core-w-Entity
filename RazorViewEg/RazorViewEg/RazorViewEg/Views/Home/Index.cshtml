@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<div>
+    @*<p>Today's Date is @DateTime.Now.ToString() </p>
+
+        @{
+            int a, b, c;
+            a = 35; b = 24; c = a + b;
+        }
+
+        <p>The sum of @a and @b is @c</p>
+
+
+        @if (a > b)
+        {
+            <p>@a  is Greater!</p>
+        }
+        else
+        {
+            <p>@b  is Greater</p>
+        }
+
+        @{
+            string[] S = new string[]
+            {
+                "Manzoor",
+                "The",
+                "Trainer"
+            };
+        }
+
+        <ol>
+            @foreach (var item in S)
+            {
+                <li>@item</li>
+            }
+        </ol>
+
+        <p>info@@manzoorthetrainer.com</p>*@
+
+    @*@using (Html.BeginForm("Save", "Home", FormMethod.Post))
+        {
+            @Html.Label("UserName") <span>:</span> @Html.TextBox("UserName")<br/>
+            @Html.Label("Email") <span>:</span> @Html.TextBox("Email")
+            <input type="submit" value="Register" />
+        }
+
+        <form method="post" action="Home\Save">
+                User Name : <input type="text" name="UserName" id="UserName" /> <br />
+                Email : <input type="text" name="Email" id="Email" /> <br />
+
+            </form>*@
+
+
+    @*<form method="post" action="Home/Save">
+            <fieldset>
+                <legend>Employee Registration</legend>
+                <div>
+                    <label>Name</label>
+                    <input type='text' name='empName' placeholder='Enter Name'>
+                </div>
+                <div>
+                    <label> Email </label>
+                    <input type='email' name='empEmail' placeholder='Enter email'>
+                </div>
+                <div>
+                    <label> Gender </label>
+                    <input type='radio' name='empGender' value='M'>
+                    Male
+                    <input type='radio' name='empGender' value='F'>
+                    Female
+                </div>
+                <div>
+                    <label> Qualification </label>
+                    <select name='empQualification'>
+                        <option value="1"> M.Tech </option>
+                        <option value="2"> B.Tech </option>
+                        <option value="3"> M.Sc </option>
+                        <option value="4"> B.Sc </option>
+                        <option value="5"> MCA </option>
+                        <option value="6"> Others </option>
+                    </select>
+                </div>
+                <div>
+                    <label> Address </label>
+                    <textarea name='empAddress' rows='3'></textarea>
+                </div>
+                <div>
+                    <input type='checkbox' name='empAgreement'>
+                    I Agree with all your terms and conditions...
+                </div>
+                <button type='submit'> Submit </button>
+            </fieldset>
+        </form>*@
+</div>
+
+@{
+    List<RazorViewEg.Qualification> list = new List<RazorViewEg.Qualification>();
+    list.Add(new RazorViewEg.Qualification() { Qid = 1, QName = "M.Tech" });
+    list.Add(new RazorViewEg.Qualification() { Qid = 2, QName = "MCA" });
+    list.Add(new RazorViewEg.Qualification() { Qid = 3, QName = "MSc" });
+    SelectList selectList = new SelectList(list, "Qid", "QName");
+}
+
+@using (Html.BeginForm("Save", "Home", FormMethod.Post))
+{
+<fieldset>
+    <legend>Employee Registration</legend>
+    <div>
+        @Html.Label("Enter Name") : @Html.TextBox("empName")
+    </div>
+    <div>
+        @Html.Label("Enter Email") : @Html.TextBox("empEmail")
+    </div>
+    <div>
+        @Html.Label("Select Gender") :
+        @Html.RadioButton("empGender", "M")Male
+        @Html.RadioButton("empGender", "F")Female
+    </div>
+    <div>
+        @Html.Label("Qualification") :
+        @Html.DropDownList("empQualification", selectList)
+        @Html.ListBox("empQualification", selectList)
+    </div>
+    <div>
+        @Html.Label("Enter Address") : @Html.TextArea("empAddress", new { rows = "3" })
+    </div>
+    <div>
+        @Html.Label("Resume") : @Html.TextBox("empResume",null, new { type = "file" })
+    </div>
+    <div>
+        @Html.CheckBox("empAgreement", true) I Agree with all your terms and conditions
+    </div>
+    @*@Html.TextBox("Submit", "Submit", new { type = "Submit" })*@
+    <input type="submit" value="Submit" />
+</fieldset>
+}

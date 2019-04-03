@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@*<script src="~/lib/jQuery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        console.log("I am jQuery And I am ready!");
+        alert("Hi");
+    });
+</script>*@
+
+<h2>Index</h2>
+    <b>MTT - From Index Of Home</b> <br />
+
+<form method="post" action="Home\Save">
+    DepartmentId : <input type='text' id="i_DeptId" name="DeptId" /> <br />
+    DepartmenttName : <input type="text" id="i_DeptName" name="DeptName" /><br />
+    <input type='submit' value='Save' />
+</form>
+
+
+@*<form method="get" action="Home\GetDept">
+    DepartmentId : <input type='text' id="DeptId" name="DeptId" /> <br />
+    <input type='submit' value='Save' />
+</form>*@
