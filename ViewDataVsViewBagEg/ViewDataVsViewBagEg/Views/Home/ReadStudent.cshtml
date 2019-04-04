@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "ReadStudent";
+}
+
+<h2>ReadStudent</h2>
+<div>
+    @*@{
+            ViewDataVsViewBagEg.Models.Student S = ViewBag.myStudent;
+        }
+
+        <div>
+            Student Id : @S.StudentId <br />
+            Student Name : @S.Name <br/>
+            Email : @S.Email
+        </div>*@
+</div>
+
+
+@{
+    List<ViewDataVsViewBagEg.Models.Student> students = ViewBag.students;
+}
+
+<table border="1">
+    <tr>
+        <td>StudentId</td>
+        <td>Name</td>
+        <td>Email</td>
+    </tr>
+    @foreach (var student in students)
+    {
+        <tr>
+            <td>@student.StudentId</td>
+            <td>@student.Name</td>
+            <td>@student.Email</td>
+        </tr>
+    }
+</table>

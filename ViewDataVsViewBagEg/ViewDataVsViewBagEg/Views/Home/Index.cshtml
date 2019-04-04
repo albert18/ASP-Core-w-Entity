@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Welcome To View - Index</h2>
+
+<div>
+    @*@if (@ViewData["VD_MyData"] != null)
+        {
+        <p>@(int.Parse(ViewData["VD_MyData"].ToString())+40)</p>
+        }*@
+
+
+@*<p>@(ViewBag.VB_MyData+35)</p>*@
+
+@*<p>@ViewData["VB_MyData"].ToString()</p>*@
+</div>
+
+@using (Html.BeginForm("ReadStudent", "Home", FormMethod.Get))
+{
+<div>
+    @Html.Label("Student Id") : @Html.TextBox("StudentId") <br />
+    <input type="submit" value="GetTheStudent" /><br />
+</div>
+}
