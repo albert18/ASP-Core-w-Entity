@@ -1,0 +1,27 @@
+﻿@model TagHelperAndFormValidationsEg.Models.Student
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<script src="~/lib/jQuery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Students", FormMethod.Post))
+    {
+    <div>
+        @Html.LabelFor(x => x.Name) : @Html.TextBoxFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+
+        @Html.LabelFor(x => x.Email) : @Html.TextBoxFor(x => x.Email)
+        @Html.ValidationMessageFor(x => x.Email)
+        <input type="submit" value="Create" />
+
+        @Html.ValidationSummary()
+    </div>
+    }
+<div>
+
+</div>
