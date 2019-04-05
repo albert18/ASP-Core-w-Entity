@@ -1,0 +1,20 @@
+﻿@*@model ViewDataVsViewBagEg.Models.Student*@
+
+@model List<ViewDataVsViewBagEg.Models.Student>
+@{
+    ViewData["Title"] = "ReadStudent";
+}
+
+<h2>ReadStudent</h2>
+<div>
+    @*StudentId : @Model.StudentId <br />
+    Name : @Model.Name <br />
+    Email : @Model.Email <br />*@
+</div>
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>@student.Name  @student.Email</li>
+    }
+</ul>

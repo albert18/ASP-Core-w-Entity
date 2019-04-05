@@ -1,0 +1,26 @@
+﻿@model ViewDataVsViewBagEg.Models.Student
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create - Student</h2>
+
+<h3>
+    @if(TempData["Msg"]!=null)
+    {
+        <p>@TempData["Msg"].ToString()</p>
+
+        TempData.Keep("Msg");
+    }
+</h3>
+
+@Html.ActionLink("Test","Test","Students")
+
+@using (Html.BeginForm("Create","Students",FormMethod.Post))
+{
+<div>
+    @Html.LabelFor(x => x.Name) : @Html.TextBoxFor(x => x.Name)
+    @Html.LabelFor(x => x.Email) : @Html.TextBoxFor(x => x.Email)
+    <input type="submit" value="Create"/>
+</div>
+}

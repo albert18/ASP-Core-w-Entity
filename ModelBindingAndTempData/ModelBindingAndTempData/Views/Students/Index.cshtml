@@ -1,0 +1,16 @@
+﻿@model List<ViewDataVsViewBagEg.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.ActionLink("Add New Student","Create","Students")
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>@student.Name  @student.Email</li>
+    }
+</ul>
