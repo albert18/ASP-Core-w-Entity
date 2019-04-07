@@ -1,0 +1,31 @@
+﻿@model TagHelperAndFormValidationsEg.Models.Student
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<script src="~/lib/jQuery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<div>
+    <form asp-controller="Students" asp-action="Create" method="post" novalidate>
+
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input type="text" class="form-control"  placeholder="Enter Name" asp-for="Name" >            
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input type="email" class="form-control" placeholder="Enter Email" asp-for="Email">
+        </div>
+
+        <input type="submit" class="btn btn-danger" formnovalidate="formnovalidate" value="Cancel" asp-action="Index" asp-controller="Students" /> |<input type="submit" class="btn btn-primary" value="Create" />
+        <div class="alert alert-dismissible alert-danger" asp-validation-summary="All" ></div>
+    </form>
+</div>

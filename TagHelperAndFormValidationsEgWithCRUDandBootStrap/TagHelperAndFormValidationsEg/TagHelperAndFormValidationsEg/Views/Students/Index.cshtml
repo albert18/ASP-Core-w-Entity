@@ -1,0 +1,29 @@
+﻿@model List<TagHelperAndFormValidationsEg.Models.Student>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h2>Index</h2>
+<a asp-action="Create" asp-controller="Students" class="btn btn-link"> Add New Studemt</a>
+<table class="table table-hover">
+    <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Manage</td>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.Name</td>
+            <td>@student.Email</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Students", new { StudentId = student.StudentId })  |
+                @Html.ActionLink("Delete", "Delete", "Students", new { StudentId = student.StudentId })
+            </td>
+        </tr>
+    }
+</table>
+

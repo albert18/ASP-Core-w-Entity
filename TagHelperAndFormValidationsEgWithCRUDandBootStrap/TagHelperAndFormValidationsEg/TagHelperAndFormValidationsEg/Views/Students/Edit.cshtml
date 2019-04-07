@@ -1,0 +1,24 @@
+﻿@model TagHelperAndFormValidationsEg.Models.Student
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div>
+    <form asp-controller="Students" asp-action="Edit" method="post" novalidate>
+        <label asp-for="StudentId">Name</label> : <input asp-for="StudentId" type="text" readonly />
+        <span asp-validation-for="Name" style="color:red"></span> <br />
+
+        <label asp-for="Name">Name</label> : <input asp-for="Name" type="text" />
+        <span asp-validation-for="Name" style="color:red"></span> <br />
+
+        <label asp-for="Email">Email</label> : <input asp-for="Email" type="email" />
+        <span asp-validation-for="Email" style="color:red"></span> <br />
+
+<input type="submit" value="Cancel" asp-action="Index" asp-controller="Students" /> | <input type="submit" value="Edit" />
+        <div asp-validation-summary="All" style="color:red"></div>
+    </form>
+</div>
