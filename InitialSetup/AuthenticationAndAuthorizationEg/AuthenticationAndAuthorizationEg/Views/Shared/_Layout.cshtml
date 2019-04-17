@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+</head>
+<body>
+    <header>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-controller="AboutUs" asp-action="Index">AboutUs</a>
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("User") || User.IsInRole("Admin")))
+        {
+        <a asp-controller="Students" asp-action="Index">Students</a>
+        }
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+        <a asp-controller="Account" asp-action="Register">Register</a>
+        <a asp-controller="Account" asp-action="Login">Login</a>
+        }
+        else
+        {
+    <a asp-controller="Services" asp-action="Index">Services</a>
+    <a asp-controller="Account" asp-action="Logout">Logout</a>
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+        <span>Welcome Mr./Ms.  @User.Identity.Name </span>
+        }
+    </header>
+    <section>@RenderBody()</section>
+    <footer>www.ManzoorTheTrainer.com</footer>
+</body>
+</html>
