@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AjaxLinksAndForms.Models.Student>
+<p>
+    <a asp-action="AjaxEdit" asp-controller="Students"
+       data-ajax="true"
+       data-ajax-method="GET"
+       data-ajax-mode="replace"
+       data-ajax-update="#ajaxForm">Ajax Create</a>
+</p>
+<div id="studentList">
+    @{ Html.RenderPartial("AjaxDelete");}
+</div>
+<div id="ajaxForm">
+</div>

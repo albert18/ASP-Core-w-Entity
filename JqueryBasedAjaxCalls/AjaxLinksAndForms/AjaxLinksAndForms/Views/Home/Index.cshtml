@@ -1,0 +1,192 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="~/lib/scripts/jquery.min.js"></script>
+
+<div>
+    @*<script>
+        $(document).ready(function () {
+
+            $(".btn").click(function () {
+                //alert("Hi");
+                //console.log("Hello");
+
+                //var myArry = [1, 2, 3, 4];
+                //var result = "<ul>";
+                //$.each(myArry, function (index, item) {
+                //    var listItem = "<li>" + item + "</li>";
+                //    result += listItem;
+                //});
+                //result += "</ul>";
+
+                //$("#myDiv").append(result);
+
+                //var myVal = $("#myTextBox").val();
+                //$("#myDiv").html("<b>"+myVal+"</b>");
+
+                //    var employees = [{ id: 1, name: 'manzoor' },
+                //    { id: 2, name: 'peter' },
+                //    { id: 3, name: 'jack' }];
+
+                //    var myTable = "<table class='table table-responsive table-bordered table-striped table-hover'>" +
+                //        "<thead><tr><th>ID</th><th>Name</th></tr></thead><tbody>";
+                //    $.each(employees, function (index, item) {
+                //        var myRow = "<tr><td>" + item.id + "</td><td>" + item.name + "</td></tr>";
+                //        myTable += myRow;
+                //    });
+                //    myTable +="</tbody></table>"
+                //    $("#myDiv").html(myTable);
+                //});
+
+            });
+    </script>
+
+    <input type="text" id="myTextBox" value="Manzoor" />
+    <input type="button" id="myButton" value="ClickMe" class="btn" />
+
+    <div id="myDiv">This is My Div</div>*@
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#progressDiv").hide();
+        LoadGrid();
+        $("#GetAllStudents").click(function myfunction() {
+            $("#progressDiv").show();
+            $.ajax({
+                url: '/JAStudents/GetStudents',
+                type: 'GET',
+                dataType: 'json',
+                success: function (students) {
+                    PerpareTable(students);
+                    $("#progressDiv").hide();
+                }
+            });
+        });
+
+        function LoadGrid() {
+            $("#progressDiv").show();
+            $.ajax({
+                url: '/JAStudents/GetStudents',
+                type: 'GET',
+                dataType: 'json',
+                success: function (students) {
+                    PerpareTable(students);
+                    $("#progressDiv").hide();
+                }
+            });
+        }
+
+        function PerpareTable(students) {
+            var myTable = "<table class='table table-responsive table-bordered table-striped table-hover'>" +
+                "<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Manage</th></tr></thead><tbody>";
+            $.each(students, function (index, item) {
+                var myRow = "<tr><td>" + item.studentId +
+                    "</td><td>" + item.name +
+                    "</td><td>" + item.email +
+                    "</td></tr>";
+                myTable += myRow;
+            });
+            myTable += "</tbody></table>"
+            $("#studentsList").html(myTable);
+        };
+
+        $("#btnGetStudent").click(function myfunction() {
+            var sid = $("#sid").val();
+            $.ajax({
+                url: '/JAStudents/GetByStudentId?id='+sid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (student) {
+                    console.log(student);
+                    FillForm(student);
+                }
+            });
+        });
+        function FillForm(student) {
+            $("#sname").val(student.name);
+            $("#semail").val(student.email);
+        };
+
+        $("#btnUpdateStudent").click(function myfunction() {
+            var sid = $("#sid").val();
+            var sname = $("#sname").val();
+            var semail = $("#semail").val();
+            var obj = { StudentId: sid, Name: sname, Email: semail };
+            $.ajax({
+                url: '/JAStudents/UpdateStudent',
+                type: 'POST',
+                dataType: 'json',
+                data:obj,
+                success: function (msg) {
+                    $("#msg").html(msg);
+                    LoadGrid();
+                }
+            });
+        });
+
+        $("#btnCreateStudent").click(function myfunction() {
+            var sid = 0;
+            var sname = $("#sname").val();
+            var semail = $("#semail").val();
+            var obj = { StudentId: sid, Name: sname, Email: semail };
+            $.ajax({
+                url: '/JAStudents/CreateStudent',
+                type: 'POST',
+                dataType: 'json',
+                data: obj,
+                success: function (msg) {
+                    $("#msg").html(msg);
+                    LoadGrid();
+                }
+            });
+        });
+
+        $("#btnDeleteStudent").click(function myfunction() {
+            var sid = $("#sid").val();
+            $.ajax({
+                url: '/JAStudents/DeleteByStudentId?id=' + sid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (msg) {
+                    ClearForm();
+                    $("#msg").html(msg);
+                    LoadGrid();
+                }
+            });
+        });
+        function ClearForm() {
+            $("#sid").val("");
+            $("#sname").val("");
+            $("#semail").val("");
+        };
+    });
+</script>
+
+<input type="button" id="GetAllStudents" value="GetAllStudents" />
+<div id="progressDiv">
+    <img src="~/lib/images/AgonizingDearestBumblebee-size_restricted.gif" />
+</div>
+<div id="studentsList"></div>
+<div id="msg" class="alert alert-dismissible alert-success"></div>
+<form>
+    <div class="form-group">
+        <label class="control-label">Id</label>
+        <input id="sid" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label  class="control-label">Name</label>
+        <input type="text" id="sname" class="form-control" />        
+    </div>
+    <div class="form-group">
+        <label class="control-label">Email</label>
+        <input type="email" id="semail" class="form-control" />        
+    </div>
+    <div class="form-group">
+        <input type="button" value="GetStudent" id="btnGetStudent" class="btn btn-default" />
+        <input type="button" value="Update" id="btnUpdateStudent" class="btn btn-default" />
+        <input type="button" value="Create" id="btnCreateStudent" class="btn btn-default" />
+        <input type="button" value="Delete" id="btnDeleteStudent" class="btn btn-default" />
+    </div>
+</form>
