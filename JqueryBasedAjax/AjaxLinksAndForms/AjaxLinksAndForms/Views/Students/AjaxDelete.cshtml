@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AjaxLinksAndForms.Models.Student>
+
+<table class="table table-responsive table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                    <a asp-action="AjaxEdit" asp-controller="Students"
+                       data-ajax="true"
+                       data-ajax-method="GET"
+                       data-ajax-mode="replace"
+                       data-ajax-url="Students\AjaxEdit?id=@item.StudentId"
+                       data-ajax-update="#ajaxForm">Ajax Edit</a> |
+                    <a asp-action="AjaxDelete" asp-controller="Students"
+                       data-ajax-begin="return confirm('Are you sure?')"
+                       data-ajax="true"
+                       data-ajax-method="GET"
+                       data-ajax-mode="replace"
+                       data-ajax-url="Students\AjaxDelete?id=@item.StudentId"
+                       data-ajax-update="#studentList">Ajax Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*+------------------------+-----------------------------+
+|      AjaxOptions       |       HTML attribute        |
++------------------------+-----------------------------+
+| Confirm                | data-ajax-confirm           |
+| HttpMethod             | data-ajax-method            |
+| InsertionMode          | data-ajax-mode              |
+| LoadingElementDuration | data-ajax-loading-duration  |
+| LoadingElementId       | data-ajax-loading           |
+| OnBegin                | data-ajax-begin             |
+| OnComplete             | data-ajax-complete          |
+| OnFailure              | data-ajax-failure           |
+| OnSuccess              | data-ajax-success           |
+| UpdateTargetId         | data-ajax-update            |
+| Url                    | data-ajax-url               |
++------------------------+-----------------------------+*@
